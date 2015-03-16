@@ -31,6 +31,9 @@
 
  Modified to take advantage of iCloud Keychain by Jamie Perkins
  09/24/2014
+
+ Modified to use kSecAttrAccessible instead of synchronizing by Daniel Cousens
+ 16/03/2015
  
  Error codes:
  
@@ -72,14 +75,14 @@ static NSString *SFHFKeychainUtilsErrorDomain = @"SFHFKeychainUtilsErrorDomain";
                      kSecClass,
                      kSecAttrAccount,
                      kSecAttrService,
-                     kSecAttrSynchronizable,
+                     kSecAttrAccessible,
                      nil];
     
     NSArray *objects = [[NSArray alloc] initWithObjects: (__bridge NSString *)
                         kSecClassGenericPassword,
                         username,
                         serviceName,
-                        kCFBooleanTrue,
+                        kSecAttrAccessibleWhenUnlockedThisDeviceOnly,
                         nil];
     
     NSMutableDictionary *query = [[NSMutableDictionary alloc] initWithObjects: objects forKeys: keys];
@@ -204,14 +207,14 @@ static NSString *SFHFKeychainUtilsErrorDomain = @"SFHFKeychainUtilsErrorDomain";
                              kSecAttrService,
                              kSecAttrLabel,
                              kSecAttrAccount,
-                             kSecAttrSynchronizable,
+                             kSecAttrAccessible,
                              nil];
             
             NSArray *objects = [[NSArray alloc] initWithObjects: (__bridge NSString *) kSecClassGenericPassword,
                                 serviceName,
                                 serviceName,
                                 username,
-                                kCFBooleanTrue,
+                                kSecAttrAccessibleWhenUnlockedThisDeviceOnly,
                                 nil];
             
             NSDictionary *query = [[NSDictionary alloc] initWithObjects: objects forKeys: keys];
@@ -229,7 +232,7 @@ static NSString *SFHFKeychainUtilsErrorDomain = @"SFHFKeychainUtilsErrorDomain";
                          kSecAttrLabel,
                          kSecAttrAccount,
                          kSecValueData,
-                         kSecAttrSynchronizable,
+                         kSecAttrAccessible,
                          nil];
         
         NSArray *objects = [[NSArray alloc] initWithObjects: (__bridge NSString *)
@@ -238,7 +241,7 @@ static NSString *SFHFKeychainUtilsErrorDomain = @"SFHFKeychainUtilsErrorDomain";
                             serviceName,
                             username,
                             [password dataUsingEncoding: NSUTF8StringEncoding],
-                            kCFBooleanTrue,
+                            kSecAttrAccessibleWhenUnlockedThisDeviceOnly,
                             nil];
         
         NSDictionary *query = [[NSDictionary alloc] initWithObjects: objects forKeys: keys];
@@ -281,7 +284,7 @@ static NSString *SFHFKeychainUtilsErrorDomain = @"SFHFKeychainUtilsErrorDomain";
                      kSecAttrAccount,
                      kSecAttrService,
                      kSecReturnAttributes,
-                     kSecAttrSynchronizable,
+                     kSecAttrAccessible,
                      nil];
     
     NSArray *objects = [[NSArray alloc] initWithObjects: (__bridge NSString *)
@@ -289,7 +292,7 @@ static NSString *SFHFKeychainUtilsErrorDomain = @"SFHFKeychainUtilsErrorDomain";
                         username,
                         serviceName,
                         kCFBooleanTrue,
-                        kCFBooleanTrue,
+                        kSecAttrAccessibleWhenUnlockedThisDeviceOnly,
                         nil];
     
     NSDictionary *query = [[NSDictionary alloc] initWithObjects: objects forKeys: keys];
