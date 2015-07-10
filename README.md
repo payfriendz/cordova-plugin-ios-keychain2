@@ -15,12 +15,8 @@ The plugin's JavaScript functions are called after creating the plugin object th
         var kc = new Keychain();
         kc.getForKey(win, fail, "some_key", "some_servicename");
 
-### iCloud keychain enabled
-
-iCloud keychain synchonizing is enabled, so the keychain will be mirrored across all devices *if* the user is signed in to iCloud (Settings > iCloud) and has iCloud keychain turned on (Settings > iCloud > Keychain)
-
 ### Usage
-        
+
 **Important:**
 
 ```js
@@ -39,7 +35,6 @@ value = value
       .replace(/[\t]/g, '\\t');
 ```
 
-              
 See the **example** folder for example usage.
 
 ```js
